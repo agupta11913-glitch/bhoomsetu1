@@ -375,6 +375,14 @@ const AppLayout = () => {
               <Route path="/citizen/compensation" element={<RoleProtectedRoute allowedRoles={[ROLES.CITIZEN, 'CITIZEN', ROLES.ADMIN]}><CitizenPaymentPage /></RoleProtectedRoute>} />
               <Route path="/citizen/rr-benefits" element={<RoleProtectedRoute allowedRoles={[ROLES.CITIZEN, 'CITIZEN', ROLES.ADMIN]}><CitizenRRBenefitsPage /></RoleProtectedRoute>} />
               <Route path="/citizen/rehabilitation" element={<RoleProtectedRoute allowedRoles={[ROLES.CITIZEN, 'CITIZEN', ROLES.ADMIN]}><CitizenRRBenefitsPage /></RoleProtectedRoute>} />
+              <Route path="/citizen/cases" element={<RoleProtectedRoute allowedRoles={[ROLES.CITIZEN, 'CITIZEN', ROLES.ADMIN]}><CasesListPage /></RoleProtectedRoute>} />
+              <Route path="/citizen/cases/:id" element={<RoleProtectedRoute allowedRoles={[ROLES.CITIZEN, 'CITIZEN', ROLES.ADMIN]}><CaseDetailsPage /></RoleProtectedRoute>} />
+              <Route path="/citizen/workflow" element={<RoleProtectedRoute allowedRoles={[ROLES.CITIZEN, 'CITIZEN', ROLES.ADMIN]}><CaseDetailsPage /></RoleProtectedRoute>} />
+              <Route path="/citizen/workflow/:id" element={<RoleProtectedRoute allowedRoles={[ROLES.CITIZEN, 'CITIZEN', ROLES.ADMIN]}><CaseDetailsPage /></RoleProtectedRoute>} />
+              <Route path="/citizen/case-workflow" element={<RoleProtectedRoute allowedRoles={[ROLES.CITIZEN, 'CITIZEN', ROLES.ADMIN]}><CaseDetailsPage /></RoleProtectedRoute>} />
+              <Route path="/citizen/case-workflow/:id" element={<RoleProtectedRoute allowedRoles={[ROLES.CITIZEN, 'CITIZEN', ROLES.ADMIN]}><CaseDetailsPage /></RoleProtectedRoute>} />
+              <Route path="/citizen/cash-workflow" element={<RoleProtectedRoute allowedRoles={[ROLES.CITIZEN, 'CITIZEN', ROLES.ADMIN]}><CaseDetailsPage /></RoleProtectedRoute>} />
+              <Route path="/citizen/cash-workflow/:id" element={<RoleProtectedRoute allowedRoles={[ROLES.CITIZEN, 'CITIZEN', ROLES.ADMIN]}><CaseDetailsPage /></RoleProtectedRoute>} />
 
               {/* System Administrator Governance Suite */}
               <Route path="/admin/dashboard" element={<RoleProtectedRoute allowedRoles={[ROLES.ADMIN, 'ADMIN']}><AdminDashboardPage /></RoleProtectedRoute>} />
@@ -391,6 +399,13 @@ const AppLayout = () => {
               <Route path="/admin/registrations" element={<RoleProtectedRoute allowedRoles={[ROLES.ADMIN, 'ADMIN']}><AdminUsersPage /></RoleProtectedRoute>} />
               <Route path="/admin/logs" element={<RoleProtectedRoute allowedRoles={[ROLES.ADMIN, 'ADMIN']}><AdminSystemMonitoringPage /></RoleProtectedRoute>} />
               <Route path="/admin/apis" element={<RoleProtectedRoute allowedRoles={[ROLES.ADMIN, 'ADMIN']}><AdminSystemMonitoringPage /></RoleProtectedRoute>} />
+
+              {/* Universal Statutory Case Workflow Routes */}
+              <Route path="/cases" element={<CasesListPage />} />
+              <Route path="/cases/:id" element={<CaseDetailsPage />} />
+              <Route path="/cases/:id/:tab" element={<CaseDetailsPage />} />
+              <Route path="/workflow" element={<CaseDetailsPage />} />
+              <Route path="/workflow/:id" element={<CaseDetailsPage />} />
 
               {/* Common Utilities & AI Tools */}
               <Route path="/reports" element={<ReportsAnalyticsPage />} />
