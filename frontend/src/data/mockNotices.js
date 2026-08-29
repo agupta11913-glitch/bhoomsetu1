@@ -1,0 +1,42 @@
+export const INITIAL_NOTICES = [
+  {
+    id: 'NOT-2026-089',
+    noticeNumber: 'SLAO/AGR/2026/SEC11-089',
+    type: 'Preliminary Notification (Section 11, RFCTLARR Act 2013)',
+    projectId: 'PRJ-001',
+    projectName: 'Agra-Lucknow Highway 6-Lane Expansion',
+    khasraNumber: '105',
+    ownerName: 'Baldev Singh',
+    areaAcre: 2.1,
+    village: 'Nagla',
+    tehsil: 'Fatehabad',
+    district: 'Agra',
+    issueDate: '2026-02-10',
+    objectionDeadline: '2026-04-11',
+    hearingDate: '2026-04-20',
+    issuingAuthority: 'Special Land Acquisition Officer (SLAO), NHAI Agra Corridor',
+    status: 'Notice Served (Objection Window Closed)',
+    gazetteRef: 'UP Gazette Extraordinary Pt. IV, Vol. 92',
+    pdfUrl: '/demo-notice-105.pdf'
+  },
+  {
+    id: 'NOT-2026-044',
+    noticeNumber: 'SLAO/AGR/2025/SEC11-044',
+    type: 'Declaration of Acquisition (Section 19, RFCTLARR Act 2013)',
+    projectId: 'PRJ-001',
+    projectName: 'Agra-Lucknow Highway 6-Lane Expansion',
+    khasraNumber: '134',
+    ownerName: 'Gram Panchayat Nagla',
+    areaAcre: 5.0,
+    village: 'Nagla',
+    tehsil: 'Fatehabad',
+    district: 'Agra',
+    issueDate: '2025-09-10',
+    objectionDeadline: '2025-10-10',
+    hearingDate: '2025-10-18',
+    issuingAuthority: 'District Magistrate & Competent Authority, Agra',
+    status: 'Possession Taken',
+    gazetteRef: 'UP Gazette Extraordinary Pt. IV, Vol. 88',
+    pdfUrl: '/demo-notice-134.pdf'
+  }
+];
