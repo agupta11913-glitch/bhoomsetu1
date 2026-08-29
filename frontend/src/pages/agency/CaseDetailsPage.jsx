@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useLandData } from '../../context/LandDataContext';
 import { CASE_WORKFLOW_STAGES } from '../../utils/constants';
+import { INITIAL_CASES } from '../../data/mockCases';
 import { formatCurrency, formatAcre, formatDate } from '../../utils/formatters';
 import {
   FileText,
@@ -40,8 +41,14 @@ export const CaseDetailsPage = () => {
   const [showAdvanceModal, setShowAdvanceModal] = useState(false);
   const [targetStageSelect, setTargetStageSelect] = useState('');
 
-  const currentCase = cases.find((c) => c.id === id) || cases[0];
-  const stageIndex = CASE_WORKFLOW_STAGES.findIndex((s) => s.id === currentCase.currentStage);
+  const currentCase = (cases && cases.length > 0 ? (
+    cases.find((c) => c.id === id) ||
+    cases.find((c) => c.caseNumber === id) ||
+    cases.find((c) => c.surveyNumber === id || c.khasraNumber === id) ||
+    cases[0]
+  ) : null) || INITIAL_CASES.find((c) => c.id === id) || INITIAL_CASES[0];
+
+  const stageIndex = CASE_WORKFLOW_STAGES.findIndex((s) => s.id === currentCase?.currentStage);
   const currentStageConfig = CASE_WORKFLOW_STAGES[stageIndex] || CASE_WORKFLOW_STAGES[0];
   const nextStageConfig = CASE_WORKFLOW_STAGES[stageIndex + 1] || null;
 
