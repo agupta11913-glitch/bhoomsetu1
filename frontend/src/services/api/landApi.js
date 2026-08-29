@@ -4,8 +4,9 @@
 // =============================================================================
 
 import { getToken } from '../auth/authApi';
+import { API_BASE_URL } from '../../config/apiConfig';
 
-const API_BASE = '/api';
+const API_BASE = API_BASE_URL;
 
 const getHeaders = () => {
   const token = getToken();

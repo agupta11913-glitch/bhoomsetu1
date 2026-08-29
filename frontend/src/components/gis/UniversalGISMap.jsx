@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { MapContainer, TileLayer, Polygon, Polyline, Tooltip, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useAuth } from '../../context/AuthContext';
+import { buildApiUrl } from '../../config/apiConfig';
 import { formatCurrency, formatAcre } from '../../utils/formatters';
 import { ErrorBoundary } from '../common/ErrorBoundary';
 import {
@@ -80,7 +81,7 @@ export const UniversalGISMap = ({
       const activeProjParam = (projId && projId !== 'ALL') ? `?projectId=${projId}` : '';
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
-      const res = await fetch(`/api/gis/authorized-map-data${activeProjParam}`, { headers });
+      const res = await fetch(buildApiUrl(`/gis/authorized-map-data${activeProjParam}`), { headers });
       if (res.ok) {
         const data = await res.json();
         if (data && data.projects) {

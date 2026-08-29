@@ -1,5 +1,6 @@
 // Central Ministry / PM Gati Shakti REST API Client
 import { getToken } from '../auth/authApi';
+import { buildApiUrl } from '../../config/apiConfig';
 
 const getAuthHeaders = () => {
   const token = getToken();
@@ -11,7 +12,7 @@ const getAuthHeaders = () => {
 
 export const fetchCentralDashboardApi = async () => {
   try {
-    const res = await fetch('/api/central/dashboard', { headers: getAuthHeaders() });
+    const res = await fetch(buildApiUrl('/central/dashboard'), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -22,7 +23,7 @@ export const fetchCentralDashboardApi = async () => {
 
 export const fetchCentralStatesApi = async () => {
   try {
-    const res = await fetch('/api/central/states', { headers: getAuthHeaders() });
+    const res = await fetch(buildApiUrl('/central/states'), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -38,8 +39,8 @@ export const fetchCentralProjectsApi = async (state = '', district = '') => {
     if (district && district !== 'ALL') params.append('district', district);
 
     const qs = params.toString();
-    const url = qs ? `/api/central/projects?${qs}` : '/api/central/projects';
-    const res = await fetch(url, { headers: getAuthHeaders() });
+    const endpoint = qs ? `/central/projects?${qs}` : '/central/projects';
+    const res = await fetch(buildApiUrl(endpoint), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -55,8 +56,8 @@ export const fetchCentralMapApi = async (state = '', district = '') => {
     if (district && district !== 'ALL') params.append('district', district);
 
     const qs = params.toString();
-    const url = qs ? `/api/central/map?${qs}` : '/api/central/map';
-    const res = await fetch(url, { headers: getAuthHeaders() });
+    const endpoint = qs ? `/central/map?${qs}` : '/central/map';
+    const res = await fetch(buildApiUrl(endpoint), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -67,7 +68,7 @@ export const fetchCentralMapApi = async (state = '', district = '') => {
 
 export const fetchCentralAcquisitionApi = async () => {
   try {
-    const res = await fetch('/api/central/acquisition', { headers: getAuthHeaders() });
+    const res = await fetch(buildApiUrl('/central/acquisition'), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -78,7 +79,7 @@ export const fetchCentralAcquisitionApi = async () => {
 
 export const fetchCentralCompensationRnRApi = async () => {
   try {
-    const res = await fetch('/api/central/compensation-rnr', { headers: getAuthHeaders() });
+    const res = await fetch(buildApiUrl('/central/compensation-rnr'), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -97,7 +98,7 @@ export const fetchCentralRnRApi = async () => {
 
 export const fetchCentralDisputesApi = async () => {
   try {
-    const res = await fetch('/api/central/disputes', { headers: getAuthHeaders() });
+    const res = await fetch(buildApiUrl('/central/disputes'), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -109,7 +110,7 @@ export const fetchCentralDisputesApi = async () => {
 export const fetchCentralEscalationsApi = async (status = 'ALL') => {
   try {
     const query = status && status !== 'ALL' ? `?status=${encodeURIComponent(status)}` : '';
-    const res = await fetch(`/api/central/escalations${query}`, {
+    const res = await fetch(buildApiUrl(`/central/escalations${query}`), {
       headers: getAuthHeaders(),
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -122,7 +123,7 @@ export const fetchCentralEscalationsApi = async (status = 'ALL') => {
 
 export const addCentralEscalationRemarkApi = async (escId, payload) => {
   try {
-    const res = await fetch(`/api/central/escalations/${encodeURIComponent(escId)}/remark`, {
+    const res = await fetch(buildApiUrl(`/central/escalations/${encodeURIComponent(escId)}/remark`), {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify(payload),
@@ -136,7 +137,7 @@ export const addCentralEscalationRemarkApi = async (escId, payload) => {
 
 export const forwardCentralEscalationApi = async (escId, payload) => {
   try {
-    const res = await fetch(`/api/central/escalations/${encodeURIComponent(escId)}/forward`, {
+    const res = await fetch(buildApiUrl(`/central/escalations/${encodeURIComponent(escId)}/forward`), {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify(payload),
@@ -150,7 +151,7 @@ export const forwardCentralEscalationApi = async (escId, payload) => {
 
 export const updateCentralEscalationStatusApi = async (escId, payload) => {
   try {
-    const res = await fetch(`/api/central/escalations/${encodeURIComponent(escId)}/status`, {
+    const res = await fetch(buildApiUrl(`/central/escalations/${encodeURIComponent(escId)}/status`), {
       method: 'PUT',
       headers: getAuthHeaders(),
       body: JSON.stringify(payload),
@@ -164,7 +165,7 @@ export const updateCentralEscalationStatusApi = async (escId, payload) => {
 
 export const fetchCentralReportsApi = async () => {
   try {
-    const res = await fetch('/api/central/reports', { headers: getAuthHeaders() });
+    const res = await fetch(buildApiUrl('/central/reports'), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {

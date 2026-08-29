@@ -1,5 +1,5 @@
 // BhoomiSetu Backend REST API Service
-const API_BASE_URL = '/api';
+import { buildApiUrl, API_BASE_URL } from '../../config/apiConfig';
 
 export const getToken = () => {
   return localStorage.getItem('bhoomisetu_token');
@@ -26,7 +26,8 @@ const apiFetch = async (endpoint, options = {}) => {
     ...(options.headers || {}),
   };
 
-  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+  const url = buildApiUrl(endpoint);
+  const response = await fetch(url, {
     ...options,
     headers,
   });

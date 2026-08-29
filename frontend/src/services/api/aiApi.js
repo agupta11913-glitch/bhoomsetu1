@@ -1,4 +1,5 @@
 import { getToken } from '../auth/authApi';
+import { buildApiUrl } from '../../config/apiConfig';
 
 const getAuthHeaders = () => {
   const token = getToken();
@@ -29,7 +30,7 @@ export const askAIAssistantApi = async ({
   const effectiveCaseId = caseId || currentCaseId;
 
   try {
-    const res = await fetch('/api/ai/chat', {
+    const res = await fetch(buildApiUrl('/ai/chat'), {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify({

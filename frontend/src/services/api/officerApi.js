@@ -1,9 +1,11 @@
 // Unified Officer Portal REST API Service for Tehsildar & Executive Officer
+import { getToken } from '../auth/authApi';
+import { buildApiUrl } from '../../config/apiConfig';
 
-const API_BASE = '/api/officer';
+const API_BASE = buildApiUrl('/officer');
 
 const getHeaders = () => {
-  const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+  const token = getToken();
   return {
     'Content-Type': 'application/json',
     ...(token ? { Authorization: `Bearer ${token}` } : {}),

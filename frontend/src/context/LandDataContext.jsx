@@ -8,6 +8,7 @@ import { INITIAL_OBJECTIONS } from '../data/mockObjections';
 import { INITIAL_AUDIT_LOGS } from '../data/mockAuditLogs';
 import { INITIAL_USERS } from '../data/mockUsers';
 import { useAuth } from './AuthContext';
+import { buildApiUrl } from '../config/apiConfig';
 import { CASE_WORKFLOW_STAGES } from '../utils/constants';
 
 const LandDataContext = createContext();
@@ -146,8 +147,8 @@ export const LandDataProvider = ({ children }) => {
     const fetchBackendData = async () => {
       try {
         const [landsRes, projectsRes] = await Promise.allSettled([
-          fetch('http://localhost:8080/api/lands'),
-          fetch('http://localhost:8080/api/projects')
+          fetch(buildApiUrl('/lands')),
+          fetch(buildApiUrl('/projects'))
         ]);
 
         if (landsRes.status === 'fulfilled' && landsRes.value.ok) {

@@ -1,5 +1,6 @@
 // Project Implementing Agency (PIA) REST API Client
 import { getToken } from '../auth/authApi';
+import { buildApiUrl } from '../../config/apiConfig';
 
 const getAuthHeaders = () => {
   const token = getToken();
@@ -11,7 +12,7 @@ const getAuthHeaders = () => {
 
 export const fetchAgencyDashboardApi = async () => {
   try {
-    const res = await fetch('/api/agency/dashboard', { headers: getAuthHeaders() });
+    const res = await fetch(buildApiUrl('/agency/dashboard'), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -22,7 +23,7 @@ export const fetchAgencyDashboardApi = async () => {
 
 export const fetchAgencyProjectsApi = async () => {
   try {
-    const res = await fetch('/api/agency/projects', { headers: getAuthHeaders() });
+    const res = await fetch(buildApiUrl('/agency/projects'), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -33,7 +34,7 @@ export const fetchAgencyProjectsApi = async () => {
 
 export const updateAgencyProjectProgressApi = async (projectId, payload) => {
   try {
-    const res = await fetch(`/api/agency/projects/${encodeURIComponent(projectId)}/progress`, {
+    const res = await fetch(buildApiUrl(`/agency/projects/${encodeURIComponent(projectId)}/progress`), {
       method: 'PUT',
       headers: getAuthHeaders(),
       body: JSON.stringify(payload),
@@ -47,7 +48,7 @@ export const updateAgencyProjectProgressApi = async (projectId, payload) => {
 
 export const addAgencyProjectRemarkApi = async (projectId, payload) => {
   try {
-    const res = await fetch(`/api/agency/projects/${encodeURIComponent(projectId)}/remark`, {
+    const res = await fetch(buildApiUrl(`/agency/projects/${encodeURIComponent(projectId)}/remark`), {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify(payload),
@@ -62,7 +63,7 @@ export const addAgencyProjectRemarkApi = async (projectId, payload) => {
 export const fetchAgencyMilestonesApi = async (projectId = 'ALL') => {
   try {
     const query = projectId && projectId !== 'ALL' ? `?projectId=${encodeURIComponent(projectId)}` : '';
-    const res = await fetch(`/api/agency/progress${query}`, { headers: getAuthHeaders() });
+    const res = await fetch(buildApiUrl(`/agency/progress${query}`), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -73,7 +74,7 @@ export const fetchAgencyMilestonesApi = async (projectId = 'ALL') => {
 
 export const updateAgencyMilestoneApi = async (milestoneId, payload) => {
   try {
-    const res = await fetch(`/api/agency/milestones/${encodeURIComponent(milestoneId)}`, {
+    const res = await fetch(buildApiUrl(`/agency/milestones/${encodeURIComponent(milestoneId)}`), {
       method: 'PUT',
       headers: getAuthHeaders(),
       body: JSON.stringify(payload),
@@ -88,7 +89,7 @@ export const updateAgencyMilestoneApi = async (milestoneId, payload) => {
 export const fetchAgencyMapApi = async (projectId = 'ALL') => {
   try {
     const query = projectId && projectId !== 'ALL' ? `?projectId=${encodeURIComponent(projectId)}` : '';
-    const res = await fetch(`/api/agency/map${query}`, { headers: getAuthHeaders() });
+    const res = await fetch(buildApiUrl(`/agency/map${query}`), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -99,7 +100,7 @@ export const fetchAgencyMapApi = async (projectId = 'ALL') => {
 
 export const fetchAgencyAcquisitionApi = async () => {
   try {
-    const res = await fetch('/api/agency/acquisition', { headers: getAuthHeaders() });
+    const res = await fetch(buildApiUrl('/agency/acquisition'), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -110,7 +111,7 @@ export const fetchAgencyAcquisitionApi = async () => {
 
 export const fetchAgencyCompensationRnRApi = async () => {
   try {
-    const res = await fetch('/api/agency/compensation-rnr', { headers: getAuthHeaders() });
+    const res = await fetch(buildApiUrl('/agency/compensation-rnr'), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -122,7 +123,7 @@ export const fetchAgencyCompensationRnRApi = async () => {
 export const fetchAgencyIssuesApi = async (status = 'ALL') => {
   try {
     const query = status && status !== 'ALL' ? `?status=${encodeURIComponent(status)}` : '';
-    const res = await fetch(`/api/agency/issues${query}`, { headers: getAuthHeaders() });
+    const res = await fetch(buildApiUrl(`/agency/issues${query}`), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -133,7 +134,7 @@ export const fetchAgencyIssuesApi = async (status = 'ALL') => {
 
 export const reportAgencyIssueApi = async (payload) => {
   try {
-    const res = await fetch('/api/agency/issues', {
+    const res = await fetch(buildApiUrl('/agency/issues'), {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify(payload),
@@ -147,7 +148,7 @@ export const reportAgencyIssueApi = async (payload) => {
 
 export const addAgencyIssueRemarkApi = async (issueId, payload) => {
   try {
-    const res = await fetch(`/api/agency/issues/${encodeURIComponent(issueId)}/remark`, {
+    const res = await fetch(buildApiUrl(`/agency/issues/${encodeURIComponent(issueId)}/remark`), {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify(payload),
@@ -161,7 +162,7 @@ export const addAgencyIssueRemarkApi = async (issueId, payload) => {
 
 export const forwardAgencyIssueApi = async (issueId, payload) => {
   try {
-    const res = await fetch(`/api/agency/issues/${encodeURIComponent(issueId)}/forward`, {
+    const res = await fetch(buildApiUrl(`/agency/issues/${encodeURIComponent(issueId)}/forward`), {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify(payload),
@@ -176,7 +177,7 @@ export const forwardAgencyIssueApi = async (issueId, payload) => {
 export const fetchAgencyDocumentsApi = async (projectId = 'ALL') => {
   try {
     const query = projectId && projectId !== 'ALL' ? `?projectId=${encodeURIComponent(projectId)}` : '';
-    const res = await fetch(`/api/agency/documents${query}`, { headers: getAuthHeaders() });
+    const res = await fetch(buildApiUrl(`/agency/documents${query}`), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -187,7 +188,7 @@ export const fetchAgencyDocumentsApi = async (projectId = 'ALL') => {
 
 export const uploadAgencyDocumentApi = async (payload) => {
   try {
-    const res = await fetch('/api/agency/documents', {
+    const res = await fetch(buildApiUrl('/agency/documents'), {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify(payload),
@@ -201,7 +202,7 @@ export const uploadAgencyDocumentApi = async (payload) => {
 
 export const fetchAgencyReportsApi = async () => {
   try {
-    const res = await fetch('/api/agency/reports', { headers: getAuthHeaders() });
+    const res = await fetch(buildApiUrl('/agency/reports'), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {

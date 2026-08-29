@@ -4,8 +4,9 @@
 // =============================================================================
 
 import { getToken } from '../auth/authApi';
+import { buildApiUrl } from '../../config/apiConfig';
 
-const API_BASE = '/api/tehsildar';
+const API_BASE = buildApiUrl('/tehsildar');
 
 const getHeaders = () => {
   const token = getToken();

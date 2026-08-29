@@ -1,5 +1,6 @@
 // State Government REST API Client
 import { getToken } from '../auth/authApi';
+import { buildApiUrl } from '../../config/apiConfig';
 
 const getAuthHeaders = () => {
   const token = getToken();
@@ -11,7 +12,7 @@ const getAuthHeaders = () => {
 
 export const fetchStateDashboardApi = async (state = 'Uttar Pradesh') => {
   try {
-    const res = await fetch(`/api/state/dashboard?state=${encodeURIComponent(state)}`, {
+    const res = await fetch(buildApiUrl(`/state/dashboard?state=${encodeURIComponent(state)}`), {
       headers: getAuthHeaders(),
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -24,7 +25,7 @@ export const fetchStateDashboardApi = async (state = 'Uttar Pradesh') => {
 
 export const fetchStateDistrictsApi = async (state = 'Uttar Pradesh') => {
   try {
-    const res = await fetch(`/api/state/districts?state=${encodeURIComponent(state)}`, {
+    const res = await fetch(buildApiUrl(`/state/districts?state=${encodeURIComponent(state)}`), {
       headers: getAuthHeaders(),
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -37,10 +38,10 @@ export const fetchStateDistrictsApi = async (state = 'Uttar Pradesh') => {
 
 export const fetchStateProjectsApi = async (state = 'Uttar Pradesh', district = '') => {
   try {
-    const url = district && district !== 'ALL'
-      ? `/api/state/projects?state=${encodeURIComponent(state)}&district=${encodeURIComponent(district)}`
-      : `/api/state/projects?state=${encodeURIComponent(state)}`;
-    const res = await fetch(url, { headers: getAuthHeaders() });
+    const endpoint = district && district !== 'ALL'
+      ? `/state/projects?state=${encodeURIComponent(state)}&district=${encodeURIComponent(district)}`
+      : `/state/projects?state=${encodeURIComponent(state)}`;
+    const res = await fetch(buildApiUrl(endpoint), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -51,10 +52,10 @@ export const fetchStateProjectsApi = async (state = 'Uttar Pradesh', district = 
 
 export const fetchStateMapApi = async (state = 'Uttar Pradesh', district = '') => {
   try {
-    const url = district && district !== 'ALL'
-      ? `/api/state/map?state=${encodeURIComponent(state)}&district=${encodeURIComponent(district)}`
-      : `/api/state/map?state=${encodeURIComponent(state)}`;
-    const res = await fetch(url, { headers: getAuthHeaders() });
+    const endpoint = district && district !== 'ALL'
+      ? `/state/map?state=${encodeURIComponent(state)}&district=${encodeURIComponent(district)}`
+      : `/state/map?state=${encodeURIComponent(state)}`;
+    const res = await fetch(buildApiUrl(endpoint), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -65,7 +66,7 @@ export const fetchStateMapApi = async (state = 'Uttar Pradesh', district = '') =
 
 export const fetchStateAcquisitionApi = async (state = 'Uttar Pradesh') => {
   try {
-    const res = await fetch(`/api/state/acquisition?state=${encodeURIComponent(state)}`, {
+    const res = await fetch(buildApiUrl(`/state/acquisition?state=${encodeURIComponent(state)}`), {
       headers: getAuthHeaders(),
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -78,7 +79,7 @@ export const fetchStateAcquisitionApi = async (state = 'Uttar Pradesh') => {
 
 export const fetchStateCompensationApi = async (state = 'Uttar Pradesh') => {
   try {
-    const res = await fetch(`/api/state/compensation?state=${encodeURIComponent(state)}`, {
+    const res = await fetch(buildApiUrl(`/state/compensation?state=${encodeURIComponent(state)}`), {
       headers: getAuthHeaders(),
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -91,7 +92,7 @@ export const fetchStateCompensationApi = async (state = 'Uttar Pradesh') => {
 
 export const fetchStateRnRApi = async (state = 'Uttar Pradesh') => {
   try {
-    const res = await fetch(`/api/state/r-and-r?state=${encodeURIComponent(state)}`, {
+    const res = await fetch(buildApiUrl(`/state/r-and-r?state=${encodeURIComponent(state)}`), {
       headers: getAuthHeaders(),
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -104,7 +105,7 @@ export const fetchStateRnRApi = async (state = 'Uttar Pradesh') => {
 
 export const fetchStateCompensationRnRApi = async (state = 'Uttar Pradesh') => {
   try {
-    const res = await fetch(`/api/state/compensation-rnr?state=${encodeURIComponent(state)}`, {
+    const res = await fetch(buildApiUrl(`/state/compensation-rnr?state=${encodeURIComponent(state)}`), {
       headers: getAuthHeaders(),
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -117,7 +118,7 @@ export const fetchStateCompensationRnRApi = async (state = 'Uttar Pradesh') => {
 
 export const fetchStateDisputesApi = async (state = 'Uttar Pradesh') => {
   try {
-    const res = await fetch(`/api/state/disputes?state=${encodeURIComponent(state)}`, {
+    const res = await fetch(buildApiUrl(`/state/disputes?state=${encodeURIComponent(state)}`), {
       headers: getAuthHeaders(),
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -131,7 +132,7 @@ export const fetchStateDisputesApi = async (state = 'Uttar Pradesh') => {
 export const fetchStateEscalationsApi = async (state = 'Uttar Pradesh', status = 'ALL') => {
   try {
     const query = status && status !== 'ALL' ? `&status=${encodeURIComponent(status)}` : '';
-    const res = await fetch(`/api/state/escalations?state=${encodeURIComponent(state)}${query}`, {
+    const res = await fetch(buildApiUrl(`/state/escalations?state=${encodeURIComponent(state)}${query}`), {
       headers: getAuthHeaders(),
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -144,7 +145,7 @@ export const fetchStateEscalationsApi = async (state = 'Uttar Pradesh', status =
 
 export const addStateEscalationRemarkApi = async (escId, payload) => {
   try {
-    const res = await fetch(`/api/state/escalations/${encodeURIComponent(escId)}/remark`, {
+    const res = await fetch(buildApiUrl(`/state/escalations/${encodeURIComponent(escId)}/remark`), {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify(payload),
@@ -158,7 +159,7 @@ export const addStateEscalationRemarkApi = async (escId, payload) => {
 
 export const forwardStateEscalationApi = async (escId, payload) => {
   try {
-    const res = await fetch(`/api/state/escalations/${encodeURIComponent(escId)}/forward`, {
+    const res = await fetch(buildApiUrl(`/state/escalations/${encodeURIComponent(escId)}/forward`), {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify(payload),
@@ -172,7 +173,7 @@ export const forwardStateEscalationApi = async (escId, payload) => {
 
 export const escalateStateToChiefSecretaryApi = async (escId, payload) => {
   try {
-    const res = await fetch(`/api/state/escalations/${encodeURIComponent(escId)}/escalate`, {
+    const res = await fetch(buildApiUrl(`/state/escalations/${encodeURIComponent(escId)}/escalate`), {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify(payload),
@@ -186,7 +187,7 @@ export const escalateStateToChiefSecretaryApi = async (escId, payload) => {
 
 export const updateStateEscalationStatusApi = async (escId, payload) => {
   try {
-    const res = await fetch(`/api/state/escalations/${encodeURIComponent(escId)}/status`, {
+    const res = await fetch(buildApiUrl(`/state/escalations/${encodeURIComponent(escId)}/status`), {
       method: 'PUT',
       headers: getAuthHeaders(),
       body: JSON.stringify(payload),
@@ -200,7 +201,7 @@ export const updateStateEscalationStatusApi = async (escId, payload) => {
 
 export const fetchStateReportsApi = async (state = 'Uttar Pradesh') => {
   try {
-    const res = await fetch(`/api/state/reports?state=${encodeURIComponent(state)}`, {
+    const res = await fetch(buildApiUrl(`/state/reports?state=${encodeURIComponent(state)}`), {
       headers: getAuthHeaders(),
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);

@@ -1,5 +1,6 @@
 // System Administrator REST API Client
 import { getToken } from '../auth/authApi';
+import { buildApiUrl } from '../../config/apiConfig';
 
 const getAuthHeaders = () => {
   const token = getToken();
@@ -11,7 +12,7 @@ const getAuthHeaders = () => {
 
 export const fetchAdminDashboardApi = async () => {
   try {
-    const res = await fetch('/api/admin/dashboard', { headers: getAuthHeaders() });
+    const res = await fetch(buildApiUrl('/admin/dashboard'), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -22,7 +23,7 @@ export const fetchAdminDashboardApi = async () => {
 
 export const fetchAdminUsersApi = async () => {
   try {
-    const res = await fetch('/api/admin/users', { headers: getAuthHeaders() });
+    const res = await fetch(buildApiUrl('/admin/users'), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -33,7 +34,7 @@ export const fetchAdminUsersApi = async () => {
 
 export const createAdminUserApi = async (payload) => {
   try {
-    const res = await fetch('/api/admin/users', {
+    const res = await fetch(buildApiUrl('/admin/users'), {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify(payload),
@@ -47,7 +48,7 @@ export const createAdminUserApi = async (payload) => {
 
 export const updateAdminUserApi = async (id, payload) => {
   try {
-    const res = await fetch(`/api/admin/users/${id}`, {
+    const res = await fetch(buildApiUrl(`/admin/users/${id}`), {
       method: 'PUT',
       headers: getAuthHeaders(),
       body: JSON.stringify(payload),
@@ -61,7 +62,7 @@ export const updateAdminUserApi = async (id, payload) => {
 
 export const toggleAdminUserStatusApi = async (id) => {
   try {
-    const res = await fetch(`/api/admin/users/${id}/toggle-status`, {
+    const res = await fetch(buildApiUrl(`/admin/users/${id}/toggle-status`), {
       method: 'PUT',
       headers: getAuthHeaders(),
     });
@@ -74,7 +75,7 @@ export const toggleAdminUserStatusApi = async (id) => {
 
 export const resetAdminUserAccessApi = async (id) => {
   try {
-    const res = await fetch(`/api/admin/users/${id}/reset-access`, {
+    const res = await fetch(buildApiUrl(`/admin/users/${id}/reset-access`), {
       method: 'POST',
       headers: getAuthHeaders(),
     });
@@ -87,7 +88,7 @@ export const resetAdminUserAccessApi = async (id) => {
 
 export const fetchAdminRolesPermissionsApi = async () => {
   try {
-    const res = await fetch('/api/admin/roles-permissions', { headers: getAuthHeaders() });
+    const res = await fetch(buildApiUrl('/admin/roles-permissions'), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -98,7 +99,7 @@ export const fetchAdminRolesPermissionsApi = async () => {
 
 export const updateAdminRolesPermissionsApi = async (payload) => {
   try {
-    const res = await fetch('/api/admin/roles-permissions', {
+    const res = await fetch(buildApiUrl('/admin/roles-permissions'), {
       method: 'PUT',
       headers: getAuthHeaders(),
       body: JSON.stringify(payload),
@@ -112,7 +113,7 @@ export const updateAdminRolesPermissionsApi = async (payload) => {
 
 export const fetchAdminProjectsDepartmentsApi = async () => {
   try {
-    const res = await fetch('/api/admin/projects-departments', { headers: getAuthHeaders() });
+    const res = await fetch(buildApiUrl('/admin/projects-departments'), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -123,7 +124,7 @@ export const fetchAdminProjectsDepartmentsApi = async () => {
 
 export const createAdminProjectApi = async (payload) => {
   try {
-    const res = await fetch('/api/admin/projects', {
+    const res = await fetch(buildApiUrl('/admin/projects'), {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify(payload),
@@ -137,7 +138,7 @@ export const createAdminProjectApi = async (payload) => {
 
 export const updateAdminProjectApi = async (id, payload) => {
   try {
-    const res = await fetch(`/api/admin/projects/${id}`, {
+    const res = await fetch(buildApiUrl(`/admin/projects/${id}`), {
       method: 'PUT',
       headers: getAuthHeaders(),
       body: JSON.stringify(payload),
@@ -151,7 +152,7 @@ export const updateAdminProjectApi = async (id, payload) => {
 
 export const fetchAdminSystemMonitoringApi = async () => {
   try {
-    const res = await fetch('/api/admin/monitoring', { headers: getAuthHeaders() });
+    const res = await fetch(buildApiUrl('/admin/monitoring'), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -162,7 +163,7 @@ export const fetchAdminSystemMonitoringApi = async () => {
 
 export const fetchAdminNotificationsApi = async () => {
   try {
-    const res = await fetch('/api/admin/notifications', { headers: getAuthHeaders() });
+    const res = await fetch(buildApiUrl('/admin/notifications'), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -173,7 +174,7 @@ export const fetchAdminNotificationsApi = async () => {
 
 export const createAdminNotificationApi = async (payload) => {
   try {
-    const res = await fetch('/api/admin/notifications', {
+    const res = await fetch(buildApiUrl('/admin/notifications'), {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify(payload),
@@ -187,7 +188,7 @@ export const createAdminNotificationApi = async (payload) => {
 
 export const fetchAdminSystemSettingsApi = async () => {
   try {
-    const res = await fetch('/api/admin/settings', { headers: getAuthHeaders() });
+    const res = await fetch(buildApiUrl('/admin/settings'), { headers: getAuthHeaders() });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -198,7 +199,7 @@ export const fetchAdminSystemSettingsApi = async () => {
 
 export const updateAdminSystemSettingsApi = async (payload) => {
   try {
-    const res = await fetch('/api/admin/settings', {
+    const res = await fetch(buildApiUrl('/admin/settings'), {
       method: 'PUT',
       headers: getAuthHeaders(),
       body: JSON.stringify(payload),
