@@ -876,11 +876,10 @@ export const LeafletGISMap = ({
 
             <div className="flex items-center gap-2 pt-1">
               <button
-                onClick={() => navigate(`/cases/${selectedParcelPanel.caseId || 'CASE-2026-DME-0101'}`)}
-                className="flex-1 bg-gov-blue-900 hover:bg-gov-blue-800 text-white font-extrabold py-2 rounded-xl text-center flex items-center justify-center gap-1 transition"
+                onClick={() => setSelectedParcelPanel(null)}
+                className="flex-1 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-extrabold py-2 rounded-xl text-center flex items-center justify-center gap-1 transition"
               >
-                <span>Open Case Workflow</span>
-                <ExternalLink className="w-3 h-3" />
+                <span>Close Details</span>
               </button>
             </div>
           </div>

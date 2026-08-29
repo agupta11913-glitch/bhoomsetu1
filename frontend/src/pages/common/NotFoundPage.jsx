@@ -10,9 +10,9 @@ export const NotFoundPage = () => {
     <div className="min-h-[70vh] flex flex-col items-center justify-center text-center p-6 space-y-4">
       <GovEmblem size="lg" />
       <h1 className="text-4xl font-black text-gov-blue-900">404</h1>
-      <h2 className="text-lg font-bold text-slate-800">Page or Cadastral Sheet Not Found</h2>
+      <h2 className="text-lg font-bold text-slate-800">Page Not Found</h2>
       <p className="text-xs text-slate-500 max-w-sm">
-        The requested administrative portal route or cadastral dataset does not exist in the active directory.
+        The requested administrative portal route does not exist in the active directory.
       </p>
       <button
         onClick={() => navigate('/')}

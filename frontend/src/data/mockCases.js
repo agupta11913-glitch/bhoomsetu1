@@ -1,4 +1,4 @@
-// Mock Cases Dataset for End-to-End Land Acquisition Case Workflow
+// Mock Cases Dataset for Land Acquisition Details
 export const INITIAL_CASES = [
   {
     id: 'CASE-2026-DME-0101',

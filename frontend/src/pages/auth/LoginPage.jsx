@@ -163,7 +163,7 @@ export const LoginPage = () => {
               <div className="space-y-2 pt-2">
                 <div className="flex items-center gap-2 text-xs text-slate-200">
                   <CheckCircle2 className="w-4 h-4 text-gov-green-500 shrink-0" />
-                  <span>12-Stage End-to-End Acquisition Case Workflow</span>
+                  <span>12-Stage Statutory RFCTLARR Land Acquisition Lifecycle</span>
                 </div>
                 <div className="flex items-center gap-2 text-xs text-slate-200">
                   <CheckCircle2 className="w-4 h-4 text-gov-green-500 shrink-0" />

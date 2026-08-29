@@ -380,11 +380,11 @@ export const CitizenRRBenefitsPage = () => {
             <span>{isHindi ? 'स्पष्टीकरण / दावा अनुरोध दर्ज करें' : 'Request Clarification'}</span>
           </button>
           <button
-            onClick={() => navigate('/cases/CASE-2026-DME-0101')}
+            onClick={() => navigate('/citizen/my-land')}
             className="bg-white/10 hover:bg-white/20 text-white font-bold px-4 py-2 rounded-2xl text-xs flex items-center justify-center gap-1.5 border border-white/20 transition"
           >
-            <FileText className="w-3.5 h-3.5" />
-            <span>{isHindi ? 'केस कार्यप्रवाह देखें' : 'View Full Case Workflow'}</span>
+            <MapPin className="w-3.5 h-3.5" />
+            <span>{isHindi ? 'भू-अभिलेख देखें' : 'View My Land Record'}</span>
           </button>
         </div>
       </div>

@@ -49,16 +49,7 @@ export const RehabilitationResettlementPage = () => {
             Monitor Project Affected Families (PAFs), constructed housing unit allotments, subsistence grants, and annuity disbursements.
           </p>
         </div>
-
         <div className="flex items-center gap-2.5 shrink-0">
-          <button
-            onClick={() => navigate('/cases/CASE-2026-DME-0101')}
-            className="bg-gov-blue-900 hover:bg-gov-blue-800 text-white font-extrabold text-xs px-4 py-2.5 rounded-xl shadow flex items-center gap-2 transition"
-          >
-            <Eye className="w-4 h-4 text-gov-saffron-500" />
-            <span>Open Case R&R Plan</span>
-          </button>
-
           <button
             onClick={() => navigate('/')}
             className="bg-slate-100 hover:bg-rose-50 text-slate-600 hover:text-rose-600 border border-slate-200 hover:border-rose-200 p-2 sm:px-3 sm:py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition shadow-xs"
