@@ -141,12 +141,12 @@ const CitizenDashboardContent = () => {
 
         {/* Card 3: Compensation Award */}
         <div
-          onClick={() => navigate('/citizen/cash-workflow')}
+          onClick={() => navigate('/citizen/compensation')}
           className="bg-white p-5 rounded-2xl border border-slate-200 shadow-gov hover:shadow-gov-md hover:border-gov-blue-800 transition cursor-pointer space-y-2"
         >
           <div className="flex justify-between items-start">
             <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
-              {lang === 'hi' ? 'स्वीकृत मुआवजा (Cash Workflow)' : 'Cash Workflow & Compensation'}
+              {lang === 'hi' ? 'स्वीकृत मुआवजा (Award)' : 'Sanctioned Compensation'}
             </span>
             <div className="p-2 rounded-lg bg-emerald-50 text-emerald-600">
               <Banknote className="w-5 h-5" />
@@ -253,11 +253,11 @@ const CitizenDashboardContent = () => {
             </p>
           </div>
           <button
-            onClick={() => navigate('/citizen/cash-workflow')}
+            onClick={() => setShowAwardModal(true)}
             className="w-full bg-gov-green-700 hover:bg-gov-green-800 text-white font-bold py-2 rounded-xl text-xs flex items-center justify-center gap-1.5 transition"
           >
             <Banknote className="w-3.5 h-3.5" />
-            <span>{lang === 'hi' ? 'मुआवजा रोकड़ कार्यप्रवाह देखें' : 'Track Cash Workflow / DBT'}</span>
+            <span>View Award Statement (₹50 Lakh)</span>
           </button>
         </div>
       </div>
