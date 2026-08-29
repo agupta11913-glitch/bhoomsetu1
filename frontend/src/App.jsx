@@ -406,6 +406,9 @@ const AppLayout = () => {
               <Route path="/cases/:id/:tab" element={<CaseDetailsPage />} />
               <Route path="/workflow" element={<CaseDetailsPage />} />
               <Route path="/workflow/:id" element={<CaseDetailsPage />} />
+              <Route path="/gis-map" element={<GISMapPage onOpenAI={() => setShowAIModal(true)} onOpenOCR={() => setShowOCRModal(true)} />} />
+              <Route path="/map" element={<GISMapPage onOpenAI={() => setShowAIModal(true)} onOpenOCR={() => setShowOCRModal(true)} />} />
+              <Route path="/gis" element={<GISMapPage onOpenAI={() => setShowAIModal(true)} onOpenOCR={() => setShowOCRModal(true)} />} />
 
               {/* Common Utilities & AI Tools */}
               <Route path="/reports" element={<ReportsAnalyticsPage />} />

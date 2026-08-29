@@ -8,16 +8,13 @@ const netlifyTomlPath = path.join(__dirname, '..', 'frontend', 'netlify.toml');
 
 if (fs.existsSync(redirectsPath)) {
   const redirectsContent = fs.readFileSync(redirectsPath, 'utf-8').trim();
-  console.log('✅ [PASS] frontend/public/_redirects exists:');
-  console.log('   Content:', redirectsContent);
+  console.log('✅ [PASS] frontend/public/_redirects exists:', redirectsContent);
 } else {
   console.error('❌ [FAIL] frontend/public/_redirects does not exist');
 }
 
 if (fs.existsSync(netlifyTomlPath)) {
-  const tomlContent = fs.readFileSync(netlifyTomlPath, 'utf-8').trim();
-  console.log('✅ [PASS] frontend/netlify.toml exists:');
-  console.log('   Content:\n', tomlContent);
+  console.log('✅ [PASS] frontend/netlify.toml exists');
 } else {
   console.error('❌ [FAIL] frontend/netlify.toml does not exist');
 }
@@ -37,6 +34,9 @@ const routesToCheck = [
   '/citizen/case-workflow',
   '/citizen/cash-workflow',
   '/citizen/cash-workflow/:id',
+  '/gis-map',
+  '/map',
+  '/gis'
 ];
 
 for (const route of routesToCheck) {
