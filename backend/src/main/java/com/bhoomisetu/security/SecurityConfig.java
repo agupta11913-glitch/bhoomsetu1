@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -47,19 +46,26 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(Customizer.withDefaults())
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        // Public Endpoints & Read APIs
-                        .requestMatchers("/", "/api", "/api/health", "/api/auth/**", "/api/ai/**", "/api/public/**", "/error", "/favicon.ico", "/api/agency/**", "/api/tehsildar/**", "/api/executive/**", "/api/officer/**", "/api/revenue-officer/**", "/api/revenue/**", "/api/district/**", "/api/state/**", "/api/central/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/projects/**", "/api/lands/**", "/api/khasras/**", "/api/citizen/**", "/api/citizens/**", "/api/notifications/**", "/api/documents/**", "/api/objections/**", "/api/rr/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/rr/**").permitAll()
+                        // 1. Preflight CORS OPTIONS requests must always be permitted
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
-                        // User Preferences & Profiles
+                        // 2. Public Authentication, Health, AI, and Public Endpoints
+                        .requestMatchers("/", "/api", "/api/health", "/api/auth/**", "/api/ai/**", "/api/public/**", "/error", "/favicon.ico").permitAll()
+
+                        // 3. Public Read APIs
+                        .requestMatchers(HttpMethod.GET, "/api/projects/**", "/api/lands/**", "/api/khasras/**", "/api/gis/**", "/api/citizen/**", "/api/citizens/**", "/api/notifications/**", "/api/documents/**", "/api/objections/**", "/api/rr/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/rr/**").permitAll()
+
+                        // 4. Portal Views & Demo Endpoints
+                        .requestMatchers("/api/agency/**", "/api/tehsildar/**", "/api/executive/**", "/api/officer/**", "/api/revenue-officer/**", "/api/revenue/**", "/api/district/**", "/api/state/**", "/api/central/**").permitAll()
+
+                        // 5. User Preferences & Profiles
                         .requestMatchers("/api/users/**").authenticated()
 
-                        // Role-Based Authorization
+                        // 6. Role-Based Authorization
                         .requestMatchers("/api/citizen/**").hasRole("CITIZEN")
                         .requestMatchers("/api/revenue-officer/**", "/api/revenue/**").hasAnyRole("REVENUE_OFFICER", "GOVERNMENT_OFFICER", "ADMIN")
                         .requestMatchers("/api/officer/**").hasAnyRole("GOVERNMENT_OFFICER", "REVENUE_OFFICER", "TEHSILDAR")
@@ -69,7 +75,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/central/**").hasAnyRole("CENTRAL_MINISTRY", "ADMIN")
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
 
-                        // Authenticated Fallback
+                        // 7. Authenticated Fallback
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
@@ -80,13 +86,32 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
+        
+        // Allowed Origin Patterns (supports Netlify production/deploy previews, Render backend, Vercel, and Localhost)
         configuration.setAllowedOriginPatterns(List.of(
+                "https://*.netlify.app",
+                "https://netlify.app",
+                "https://*.onrender.com",
+                "https://bhoomsetu1.onrender.com",
+                "https://*.vercel.app",
                 "http://localhost:[*]",
-                "http://127.0.0.1:[*]"
+                "http://127.0.0.1:[*]",
+                "http://localhost:3000",
+                "http://localhost:5173",
+                "http://localhost:8080"
         ));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With", "Accept", "Origin"));
-        configuration.setExposedHeaders(List.of("Authorization"));
+
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"));
+        configuration.setAllowedHeaders(Arrays.asList(
+                "Authorization",
+                "Content-Type",
+                "X-Requested-With",
+                "Accept",
+                "Origin",
+                "Access-Control-Request-Method",
+                "Access-Control-Request-Headers"
+        ));
+        configuration.setExposedHeaders(List.of("Authorization", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"));
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(3600L);
 
