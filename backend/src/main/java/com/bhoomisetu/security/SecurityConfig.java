@@ -49,23 +49,33 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        // 1. Preflight CORS OPTIONS requests must always be permitted
+                        // 1. CORS Preflight OPTIONS requests must be completely open
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
-                        // 2. Public Authentication, Health, AI, and Public Endpoints
+                        // 2. Public Authentication, Health, AI Assistant, and Base Endpoints
                         .requestMatchers("/", "/api", "/api/health", "/api/auth/**", "/api/ai/**", "/api/public/**", "/error", "/favicon.ico").permitAll()
 
-                        // 3. Public Read APIs
-                        .requestMatchers(HttpMethod.GET, "/api/projects/**", "/api/lands/**", "/api/khasras/**", "/api/gis/**", "/api/citizen/**", "/api/citizens/**", "/api/notifications/**", "/api/documents/**", "/api/objections/**", "/api/rr/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/rr/**").permitAll()
+                        // 3. Public Read APIs (Lands, Projects, Khasras, GIS, Objections, Documents, Notifications)
+                        .requestMatchers(HttpMethod.GET, 
+                                "/api/projects", "/api/projects/**",
+                                "/api/lands", "/api/lands/**",
+                                "/api/khasras", "/api/khasras/**",
+                                "/api/gis/**",
+                                "/api/citizen/**", "/api/citizens/**",
+                                "/api/notifications", "/api/notifications/**",
+                                "/api/documents", "/api/documents/**",
+                                "/api/objections", "/api/objections/**",
+                                "/api/rr/**"
+                        ).permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/rr/**", "/api/objections").permitAll()
 
                         // 4. Portal Views & Demo Endpoints
                         .requestMatchers("/api/agency/**", "/api/tehsildar/**", "/api/executive/**", "/api/officer/**", "/api/revenue-officer/**", "/api/revenue/**", "/api/district/**", "/api/state/**", "/api/central/**").permitAll()
 
-                        // 5. User Preferences & Profiles
+                        // 5. User Preferences & Profiles (Authenticated)
                         .requestMatchers("/api/users/**").authenticated()
 
-                        // 6. Role-Based Authorization
+                        // 6. Role-Based Protected Endpoints
                         .requestMatchers("/api/citizen/**").hasRole("CITIZEN")
                         .requestMatchers("/api/revenue-officer/**", "/api/revenue/**").hasAnyRole("REVENUE_OFFICER", "GOVERNMENT_OFFICER", "ADMIN")
                         .requestMatchers("/api/officer/**").hasAnyRole("GOVERNMENT_OFFICER", "REVENUE_OFFICER", "TEHSILDAR")
@@ -87,26 +97,27 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         
-        // Allowed Origin Patterns (supports Netlify production/deploy previews, Render backend, Vercel, and Localhost)
+        // Exact Netlify production origin, Netlify subdomains, Render origin, Vercel, and local development
         configuration.setAllowedOriginPatterns(List.of(
+                "https://bhoomsetu.netlify.app",
                 "https://*.netlify.app",
                 "https://netlify.app",
-                "https://*.onrender.com",
                 "https://bhoomsetu1.onrender.com",
+                "https://*.onrender.com",
                 "https://*.vercel.app",
-                "http://localhost:[*]",
-                "http://127.0.0.1:[*]",
                 "http://localhost:3000",
                 "http://localhost:5173",
-                "http://localhost:8080"
+                "http://localhost:8080",
+                "http://localhost:[*]",
+                "http://127.0.0.1:[*]"
         ));
 
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD"));
         configuration.setAllowedHeaders(Arrays.asList(
                 "Authorization",
                 "Content-Type",
-                "X-Requested-With",
                 "Accept",
+                "X-Requested-With",
                 "Origin",
                 "Access-Control-Request-Method",
                 "Access-Control-Request-Headers"
