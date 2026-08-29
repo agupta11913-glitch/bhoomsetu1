@@ -10,7 +10,6 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/state")
-@CrossOrigin(origins = "*", maxAge = 3600)
 public class StateController {
 
     @Autowired

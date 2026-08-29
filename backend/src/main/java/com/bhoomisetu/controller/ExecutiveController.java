@@ -12,7 +12,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/executive")
-@CrossOrigin(origins = "*", maxAge = 3600)
 public class ExecutiveController {
 
     private final ExecutiveService executiveService;

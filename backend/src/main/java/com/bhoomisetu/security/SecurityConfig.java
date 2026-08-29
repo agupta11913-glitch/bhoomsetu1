@@ -49,7 +49,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        // 1. CORS Preflight OPTIONS requests must be completely open
+                        // 1. Preflight CORS OPTIONS requests must always be permitted without authentication
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
                         // 2. Public Authentication, Health, AI Assistant, and Base Endpoints
@@ -97,22 +97,17 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         
-        // Exact Netlify production origin, Netlify subdomains, Render origin, Vercel, and local development
-        configuration.setAllowedOriginPatterns(List.of(
+        // Explicit allowed origins (No '*' wildcard)
+        configuration.setAllowedOrigins(List.of(
                 "https://bhoomsetu.netlify.app",
-                "https://*.netlify.app",
-                "https://netlify.app",
-                "https://bhoomsetu1.onrender.com",
-                "https://*.onrender.com",
-                "https://*.vercel.app",
                 "http://localhost:3000",
-                "http://localhost:5173",
-                "http://localhost:8080",
-                "http://localhost:[*]",
-                "http://127.0.0.1:[*]"
+                "http://localhost:5173"
         ));
 
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD"));
+        // Allowed HTTP Methods
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
+
+        // Allowed Headers
         configuration.setAllowedHeaders(Arrays.asList(
                 "Authorization",
                 "Content-Type",
@@ -122,7 +117,15 @@ public class SecurityConfig {
                 "Access-Control-Request-Method",
                 "Access-Control-Request-Headers"
         ));
-        configuration.setExposedHeaders(List.of("Authorization", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"));
+
+        // Exposed Headers
+        configuration.setExposedHeaders(List.of(
+                "Authorization",
+                "Access-Control-Allow-Origin",
+                "Access-Control-Allow-Credentials"
+        ));
+
+        // Allow credentials with explicit origins
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(3600L);
 

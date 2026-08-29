@@ -10,7 +10,6 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/central")
-@CrossOrigin(origins = "*", maxAge = 3600)
 public class CentralController {
 
     @Autowired

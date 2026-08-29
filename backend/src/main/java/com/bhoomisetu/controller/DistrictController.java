@@ -12,7 +12,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/district")
-@CrossOrigin(origins = "*", maxAge = 3600)
 public class DistrictController {
 
     private final DistrictService districtService;

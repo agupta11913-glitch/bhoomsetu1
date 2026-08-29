@@ -10,8 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping({"/api/revenue-officer", "/api/revenue"})
-@CrossOrigin(origins = "*", maxAge = 3600)
+@RequestMapping("/api/revenue-officer")
 public class RevenueOfficerController {
 
     private final RevenueOfficerService revenueOfficerService;

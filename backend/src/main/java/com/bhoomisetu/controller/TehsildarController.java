@@ -15,7 +15,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/tehsildar")
-@CrossOrigin(origins = "*", maxAge = 3600)
 public class TehsildarController {
 
     @Autowired

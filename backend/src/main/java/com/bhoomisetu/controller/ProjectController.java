@@ -12,7 +12,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/projects")
-@CrossOrigin(origins = "*", maxAge = 3600)
 public class ProjectController {
 
     @Autowired

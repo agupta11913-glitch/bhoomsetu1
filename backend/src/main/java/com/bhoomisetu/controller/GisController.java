@@ -10,7 +10,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/gis")
-@CrossOrigin(origins = "*", maxAge = 3600)
 public class GisController {
 
     @Autowired
