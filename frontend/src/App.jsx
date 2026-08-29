@@ -129,6 +129,7 @@ import { CitizenNoticesPage } from './pages/citizen/CitizenNoticesPage';
 import { CitizenObjectionPage } from './pages/citizen/CitizenObjectionPage';
 import { CitizenPaymentPage } from './pages/citizen/CitizenPaymentPage';
 import { CitizenRRBenefitsPage } from './pages/citizen/CitizenRRBenefitsPage';
+import { CitizenCashWorkflowPage } from './pages/citizen/CitizenCashWorkflowPage';
 
 // Tehsildar Pages
 import { TehsildarDashboard } from './pages/tehsildar/TehsildarDashboard';
@@ -381,8 +382,8 @@ const AppLayout = () => {
               <Route path="/citizen/workflow/:id" element={<RoleProtectedRoute allowedRoles={[ROLES.CITIZEN, 'CITIZEN', ROLES.ADMIN]}><CaseDetailsPage /></RoleProtectedRoute>} />
               <Route path="/citizen/case-workflow" element={<RoleProtectedRoute allowedRoles={[ROLES.CITIZEN, 'CITIZEN', ROLES.ADMIN]}><CaseDetailsPage /></RoleProtectedRoute>} />
               <Route path="/citizen/case-workflow/:id" element={<RoleProtectedRoute allowedRoles={[ROLES.CITIZEN, 'CITIZEN', ROLES.ADMIN]}><CaseDetailsPage /></RoleProtectedRoute>} />
-              <Route path="/citizen/cash-workflow" element={<RoleProtectedRoute allowedRoles={[ROLES.CITIZEN, 'CITIZEN', ROLES.ADMIN]}><CaseDetailsPage /></RoleProtectedRoute>} />
-              <Route path="/citizen/cash-workflow/:id" element={<RoleProtectedRoute allowedRoles={[ROLES.CITIZEN, 'CITIZEN', ROLES.ADMIN]}><CaseDetailsPage /></RoleProtectedRoute>} />
+              <Route path="/citizen/cash-workflow" element={<RoleProtectedRoute allowedRoles={[ROLES.CITIZEN, 'CITIZEN', ROLES.ADMIN]}><CitizenCashWorkflowPage /></RoleProtectedRoute>} />
+              <Route path="/citizen/cash-workflow/:id" element={<RoleProtectedRoute allowedRoles={[ROLES.CITIZEN, 'CITIZEN', ROLES.ADMIN]}><CitizenCashWorkflowPage /></RoleProtectedRoute>} />
 
               {/* System Administrator Governance Suite */}
               <Route path="/admin/dashboard" element={<RoleProtectedRoute allowedRoles={[ROLES.ADMIN, 'ADMIN']}><AdminDashboardPage /></RoleProtectedRoute>} />
@@ -406,6 +407,8 @@ const AppLayout = () => {
               <Route path="/cases/:id/:tab" element={<CaseDetailsPage />} />
               <Route path="/workflow" element={<CaseDetailsPage />} />
               <Route path="/workflow/:id" element={<CaseDetailsPage />} />
+              <Route path="/cash-workflow" element={<CitizenCashWorkflowPage />} />
+              <Route path="/cash-workflow/:id" element={<CitizenCashWorkflowPage />} />
               <Route path="/gis-map" element={<GISMapPage onOpenAI={() => setShowAIModal(true)} onOpenOCR={() => setShowOCRModal(true)} />} />
               <Route path="/map" element={<GISMapPage onOpenAI={() => setShowAIModal(true)} onOpenOCR={() => setShowOCRModal(true)} />} />
               <Route path="/gis" element={<GISMapPage onOpenAI={() => setShowAIModal(true)} onOpenOCR={() => setShowOCRModal(true)} />} />

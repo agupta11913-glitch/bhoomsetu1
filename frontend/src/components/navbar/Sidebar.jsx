@@ -53,6 +53,7 @@ const SidebarContent = ({ mobileOpen, onCloseMobile }) => {
           { label: 'Citizen Dashboard', path: '/', icon: Home },
           { label: 'My Land Record', path: '/citizen/my-land', icon: MapPin },
           { label: 'Case Workflow', path: '/cases/CASE-2026-DME-0101', icon: FileCheck, badge: 'Demo' },
+          { label: 'Cash Workflow', path: '/citizen/cash-workflow', icon: Banknote, badge: 'DBT', highlight: true },
           { label: 'Official Notices', path: '/citizen/notices', icon: FileText },
           { label: 'File Objection & Proof', path: '/citizen/submit-objection', icon: MessageSquareWarning },
           { label: 'Compensation', path: '/citizen/payments', icon: Banknote },
